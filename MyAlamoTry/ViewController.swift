@@ -21,6 +21,14 @@ class ViewController: UIViewController {
             print("Response: \(String(describing: response.response))")
             print("Result  : \(String(describing: response.result))")
 
+            if let json = response.result.value {
+                print("JSON: \(json)")
+            }
+
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data : \(utf8Text))")
+            }
+
         }
     }
 
