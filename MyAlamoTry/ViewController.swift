@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
 
@@ -14,6 +15,13 @@ class ViewController: UIViewController {
         print("ViewController::viewDidLoad()")
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
+        Alamofire.request("https://httpbin.org/get").responseJSON { response in
+            print("Request : \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Result  : \(String(describing: response.result))")
+
+        }
     }
 
     override func didReceiveMemoryWarning() {
