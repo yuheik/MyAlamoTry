@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        AlamofireUtil.request() { (response) in
+        HttpBinOrg.request() { (response) in
             print("Request : \(String(describing: response.request))")
             print("Response: \(String(describing: response.response))")
             print("Result  : \(String(describing: response.result))")

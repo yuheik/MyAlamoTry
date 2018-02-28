@@ -8,9 +8,19 @@
 
 import Alamofire
 
-class AlamofireUtil {
+protocol AlamofireUtil {
+    static var url: String { get }
+
+    static func request(callback: @escaping (DataResponse<Any>) -> Void)
+}
+
+// MARK: HttpBinOrg:
+
+class HttpBinOrg: AlamofireUtil {
+    static var url = "https://httpbin.org/get"
+
     static func request(callback: @escaping (DataResponse<Any>) -> Void) {
-        Alamofire.request("https://httpbin.org/get").responseJSON { (response) -> Void in
+        Alamofire.request(url).responseJSON { (response) -> Void in
             callback(response)
         }
     }
