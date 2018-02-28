@@ -28,7 +28,6 @@ class ViewController: UIViewController {
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data : \(utf8Text))")
             }
-
         }
     }
 
