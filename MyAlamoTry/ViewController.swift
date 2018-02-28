@@ -16,7 +16,19 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        AlamofireUtil.request()
+        AlamofireUtil.request() { (response) in
+            print("Request : \(String(describing: response.request))")
+            print("Response: \(String(describing: response.response))")
+            print("Result  : \(String(describing: response.result))")
+
+            if let json = response.result.value {
+                print("JSON: \(json)")
+            }
+
+            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+                print("Data : \(utf8Text))")
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
