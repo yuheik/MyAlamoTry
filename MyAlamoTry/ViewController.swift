@@ -12,11 +12,12 @@ import Alamofire
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
-        print("ViewController::viewDidLoad()")
+        LogUtil.traceFunc()
+
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        Alamofire.request("https://httpbin.org/get").responseJSON { response in
+        Alamofire.request("https://httpbin.org/get").responseJSON { (response) -> Void in
             print("Request : \(String(describing: response.request))")
             print("Response: \(String(describing: response.response))")
             print("Result  : \(String(describing: response.result))")
@@ -32,11 +33,10 @@ class ViewController: UIViewController {
     }
 
     override func didReceiveMemoryWarning() {
-        print("ViewController::didReceiveMemoryWarning()")
+        LogUtil.traceFunc()
+
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 

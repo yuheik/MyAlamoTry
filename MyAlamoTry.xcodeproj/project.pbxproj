@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0542DEFC20468A0C005DF1E8 /* LogUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0542DEFB20468A0C005DF1E8 /* LogUtil.swift */; };
 		05CDE0F3201B21D3005A99CD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CDE0F2201B21D3005A99CD /* AppDelegate.swift */; };
 		05CDE0F5201B21D3005A99CD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CDE0F4201B21D3005A99CD /* ViewController.swift */; };
 		05CDE0F8201B21D3005A99CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05CDE0F6201B21D3005A99CD /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		008C51130F1AAB47A4C2909A /* Pods-MyAlamoTry.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyAlamoTry.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyAlamoTry/Pods-MyAlamoTry.debug.xcconfig"; sourceTree = "<group>"; };
+		0542DEFB20468A0C005DF1E8 /* LogUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogUtil.swift; sourceTree = "<group>"; };
 		05CDE0EF201B21D3005A99CD /* MyAlamoTry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyAlamoTry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05CDE0F2201B21D3005A99CD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05CDE0F4201B21D3005A99CD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +91,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0542DEFA20468A0C005DF1E8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0542DEFB20468A0C005DF1E8 /* LogUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		05CDE0E6201B21D3005A99CD = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +124,7 @@
 		05CDE0F1201B21D3005A99CD /* MyAlamoTry */ = {
 			isa = PBXGroup;
 			children = (
+				0542DEFA20468A0C005DF1E8 /* Utils */,
 				05CDE0F2201B21D3005A99CD /* AppDelegate.swift */,
 				05CDE0F4201B21D3005A99CD /* ViewController.swift */,
 				05CDE0F9201B21D3005A99CD /* Assets.xcassets */,
@@ -459,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05CDE0F5201B21D3005A99CD /* ViewController.swift in Sources */,
+				0542DEFC20468A0C005DF1E8 /* LogUtil.swift in Sources */,
 				05CDE0F3201B21D3005A99CD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
