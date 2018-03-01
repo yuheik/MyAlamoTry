@@ -25,8 +25,4 @@ extension AlamofireUtil {
     }
 }
 
-// MARK: HttpBinOrg:
 
-class HttpBinOrg: AlamofireUtil {
-    static var url = "https://httpbin.org/get"
-}
