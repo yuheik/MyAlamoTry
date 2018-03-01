@@ -11,16 +11,26 @@ import Alamofire
 protocol AlamofireUtil {
     static var url: String { get }
 
-    static func request(callback: @escaping (URLRequest?, HTTPURLResponse?, Result<Any>, Data?) -> Void)
+    static func request(onSuccess: @escaping ([String:Any])  -> Void,
+                        onFailure: @escaping (Error?) -> Void) -> Void
 }
 
 extension AlamofireUtil {
-    static func request(callback: @escaping (URLRequest?, HTTPURLResponse?, Result<Any>, Data?) -> Void) {
+    static func request(onSuccess: @escaping ([String:Any])  -> Void,
+                        onFailure: @escaping (Error?) -> Void) -> Void {
+
         Alamofire.request(url).responseJSON { (response) -> Void in
-            callback(response.request,
-                     response.response,
-                     response.result,
-                     response.data)
+            print("Response: \(String(describing: response))")
+            if let value = response.result.value {
+                print("Value: \(value)")
+            }
+
+            switch response.result {
+            case .success:
+                onSuccess(response.result.value as! [String:Any])
+            case .failure:
+                onFailure(response.error)
+            }
         }
     }
 }

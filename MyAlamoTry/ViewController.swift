@@ -16,19 +16,19 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        HttpBinOrg.request() { (request, response, result, data)  in
-            print("Request : \(String(describing: request))")
-            print("Response: \(String(describing: response))")
-            print("Result  : \(String(describing: result))")
-
-            if let json = result.value {
-                print("JSON: \(json)")
+        HttpBinOrg.request(
+            onSuccess: { (json) -> Void in
+                LogUtil.traceFunc()
+                print("args    : \(String(describing: json["args"]!))")
+                print("headers : \(String(describing: json["headers"]!))")
+                print("origin  : \(String(describing: json["origin"]!))")
+                print("url     : \(String(describing: json["url"]!))")
+            },
+            onFailure: { (error) -> Void in
+                LogUtil.traceFunc()
+                // do nothing for now.
             }
-
-            if let data = data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data : \(utf8Text))")
-            }
-        }
+        )
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,4 +38,3 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 }
-
