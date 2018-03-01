@@ -11,7 +11,7 @@ import Alamofire
 protocol AlamofireUtil {
     static var url: String { get }
 
-    static func request(callback: @escaping (URLRequest?, HTTPURLResponse?) -> Void)
+    static func request(callback: @escaping (URLRequest?, HTTPURLResponse?, Result<Any>, Data?) -> Void)
 }
 
 // MARK: HttpBinOrg:
@@ -19,10 +19,12 @@ protocol AlamofireUtil {
 class HttpBinOrg: AlamofireUtil {
     static var url = "https://httpbin.org/get"
 
-    static func request(callback: @escaping (URLRequest?, HTTPURLResponse?) -> Void) {
+    static func request(callback: @escaping (URLRequest?, HTTPURLResponse?, Result<Any>, Data?) -> Void) {
         Alamofire.request(url).responseJSON { (response) -> Void in
             callback(response.request,
-                     response.response)
+                     response.response,
+                     response.result,
+                     response.data)
         }
     }
 }

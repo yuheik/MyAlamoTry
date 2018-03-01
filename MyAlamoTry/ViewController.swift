@@ -16,16 +16,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        HttpBinOrg.request() { (response) in
-            print("Request : \(String(describing: response.request))")
-            print("Response: \(String(describing: response.response))")
-            print("Result  : \(String(describing: response.result))")
+        HttpBinOrg.request() { (request, response, result, data)  in
+            print("Request : \(String(describing: request))")
+            print("Response: \(String(describing: response))")
+            print("Result  : \(String(describing: result))")
 
-            if let json = response.result.value {
+            if let json = result.value {
                 print("JSON: \(json)")
             }
 
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+            if let data = data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data : \(utf8Text))")
             }
         }
