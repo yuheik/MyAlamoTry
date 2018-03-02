@@ -9,14 +9,12 @@
 import Foundation
 
 class HttpBinOrg: AlamofireUtil {
+    typealias SpecificData = HttpBinOrgData
+
     static var url = "https://httpbin.org/get"
 
-    typealias T = HttpBinOrgData
-
-    static func parse(_ json: [String : Any]) -> HttpBinOrgData {
-        let tmp = HttpBinOrgData.init(json)
-        tmp.dump()
-        return tmp
+    static func convertJsonToSpecific(_ json: [String : Any]) -> HttpBinOrgData {
+        return HttpBinOrgData.init(json)
     }
 }
 
