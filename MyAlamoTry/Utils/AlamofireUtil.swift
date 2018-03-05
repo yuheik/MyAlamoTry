@@ -43,5 +43,3 @@ extension AlamofireUtil {
         }
     }
 }
-
-
