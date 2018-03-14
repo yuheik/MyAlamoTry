@@ -8,13 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
+    // MARK: Properties
+    @IBOutlet weak var textField: UITextField!
 
     override func viewDidLoad() {
         LogUtil.traceFunc()
 
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        textField.delegate = self
 
         /*
         HttpBinOrg.request(
@@ -48,5 +51,19 @@ class ViewController: UIViewController {
 
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    // MARK: textFied delegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        LogUtil.traceFunc()
+
+        // Hide the keyboard.
+        textField.resignFirstResponder()
+
+        return true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        LogUtil.debug("what I get: \(textField.text)")
     }
 }
