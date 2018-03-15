@@ -17,7 +17,7 @@ class DejizoUtil {
     static var urlSearchDictItem =
     "https://public.dejizo.jp/NetDicV09.asmx/SearchDicItemLite?" +
     "Dic=EJdict&" +
-    "Word=house&" +
+    "Word=%@&" +
     "Scope=HEADWORD&" +
     "Match=EXACT&" +
     "Merge=OR&" +
@@ -27,7 +27,8 @@ class DejizoUtil {
 
     static var urlGetDictItem = "https://public.dejizo.jp/NetDicV09.asmx/GetDicItemLite?" +
     "Dic=EJdict&" +
-    "Item=019755&" +
+//    "Item=019755&" +
+    "Item=004006&" +
     "Loc=&" +
     "Prof=XHTML"
 
@@ -36,7 +37,10 @@ class DejizoUtil {
                         onFailure: @escaping (Error?)       -> Void) -> Void {
         print("\(word): " + urlEncode(word))
 
-        Alamofire.request(urlSearchDictItem).responseString { (response) -> Void in
+        let searchItem = String(format: urlSearchDictItem,
+                                arguments: [urlEncode(word)])
+
+        Alamofire.request(searchItem).responseString { (response) -> Void in
             print("Response: \(String(describing: response))")
             if (response.result.isFailure) {
                 LogUtil.debug("request failed")

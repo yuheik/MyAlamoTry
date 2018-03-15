@@ -31,7 +31,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         )
         */
-
+/*
         DejizoUtil.request(
 //            word: "house",
             word: "株",
@@ -44,6 +44,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 // do nothing for now.
             }
         )
+ */
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,5 +66,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         LogUtil.debug("what I get: \(textField.text)")
+
+        if let text = textField.text {
+            DejizoUtil.request(word: text,
+                               onSuccess: { (data) -> Void in
+                                LogUtil.traceFunc()
+                                data.dump()
+            },
+                               onFailure: { (error) -> Void in
+                                LogUtil.traceFunc()
+                                // do nothing for now.
+            })
+        }
     }
 }
