@@ -13,8 +13,8 @@ import Alamofire
  * Wrapper of Dejizo Web Dictionary Service
  * https://www.est.co.jp/dev/dict/rest
  */
-class DejizoUtil {
-    static var urlSearchDictItem =
+class DejizoUtil : NSObject, XMLParserDelegate {
+    let urlSearchDictItem =
     "https://public.dejizo.jp/NetDicV09.asmx/SearchDicItemLite?" +
     "Dic=EJdict&" +
     "Word=%@&" +
@@ -25,14 +25,45 @@ class DejizoUtil {
     "PageSize=20&" +
     "PageIndex=0"
 
-    static var urlGetDictItem = "https://public.dejizo.jp/NetDicV09.asmx/GetDicItemLite?" +
+    let urlGetDictItem = "https://public.dejizo.jp/NetDicV09.asmx/GetDicItemLite?" +
     "Dic=EJdict&" +
 //    "Item=019755&" +
     "Item=004006&" +
     "Loc=&" +
     "Prof=XHTML"
 
-    static func request(word: String,
+    // MARK : XMLParserDelegate Implementation
+
+    func parserDidStartDocument(_ parser: XMLParser) {
+        LogUtil.traceFunc()
+    }
+
+    func parser(_ parser: XMLParser,
+                didStartElement elementName: String,
+                namespaceURI: String?,
+                qualifiedName qName: String?,
+                attributes attributeDict: [String : String] = [:]) {
+        LogUtil.traceFunc(params: ["element name" : elementName])
+    }
+
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        LogUtil.traceFunc(params: ["found" : string])
+    }
+
+    func parser(_ parser: XMLParser,
+                didEndElement elementName: String,
+                namespaceURI: String?,
+                qualifiedName qName: String?) {
+        LogUtil.traceFunc(params: ["elementName" : elementName])
+    }
+
+    func parserDidEndDocument(_ parser: XMLParser) {
+        LogUtil.traceFunc()
+    }
+
+    // MARK : Main
+
+    func request(word: String,
                         onSuccess: @escaping (GetDictItemResult) -> Void,
                         onFailure: @escaping (Error?)       -> Void) -> Void {
         print("\(word): " + urlEncode(word))
@@ -47,9 +78,24 @@ class DejizoUtil {
                 return
             }
 
+            guard let responseData = response.data else {
+                print("1st step failed!!\n\n")
+                return
+            }
             print("1st step success!!\n\n")
 
-            Alamofire.request(urlGetDictItem).responseString { (response) -> Void in
+            let xmlParser = XMLParser(data: responseData)
+
+            print("1.5")
+            xmlParser.delegate = self
+            print("2.0")
+            xmlParser.parse()
+            print("2.5")
+
+
+
+
+            Alamofire.request(self.urlGetDictItem).responseString { (response) -> Void in
                 print("Response: \(String(describing: response))")
                 if (response.result.isFailure) {
                     LogUtil.debug("request failed")
@@ -61,7 +107,7 @@ class DejizoUtil {
         }
     }
 
-    static func urlEncode(_ str: String) -> String {
+    func urlEncode(_ str: String) -> String {
         return str.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
     }
 }
@@ -92,3 +138,4 @@ class GetDictItemResult {
         LogUtil.debug("dummy")
     }
 }
+

@@ -68,14 +68,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         LogUtil.debug("what I get: \(textField.text)")
 
         if let text = textField.text {
-            DejizoUtil.request(word: text,
-                               onSuccess: { (data) -> Void in
-                                LogUtil.traceFunc()
-                                data.dump()
+            DejizoUtil.init().request(word: text,
+                                      onSuccess: { (data) -> Void in
+                                        LogUtil.traceFunc()
+                                        data.dump()
             },
-                               onFailure: { (error) -> Void in
-                                LogUtil.traceFunc()
-                                // do nothing for now.
+                                      onFailure: { (error) -> Void in
+                                        LogUtil.traceFunc()
+                                        // do nothing for now.
             })
         }
     }
